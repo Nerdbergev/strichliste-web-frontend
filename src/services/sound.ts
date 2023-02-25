@@ -26,7 +26,8 @@ function loadSounds(sounds: string[], dst: Object) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function playCashSound(_params?: CreateTransactionParams): void {
-  const sounds: Howl[] = Object.values((_params?.amount || 0) >= 0 ? loadedDepositSounds : loadedDispenseSounds);
+  if (!_params) return;
+  const sounds: Howl[] = Object.values((_params.amount || 0) >= 0 ? loadedDepositSounds : loadedDispenseSounds);
   const sound = sounds[Math.floor(Math.random() * sounds.length)];
   sound.play();
 }

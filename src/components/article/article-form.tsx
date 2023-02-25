@@ -240,7 +240,7 @@ function ItemList<Item>({
     <Card>
       <h3 className={styles.subHeader}>{headline}</h3>
 
-      {items.map((item) => (
+      {items && items.map(item => (
         <ListInput
           placeholder={placeholder}
           handleRemove={() => handleDeleteItem(item)}
