@@ -32,6 +32,16 @@ yarn build
 
 the output will be copied to the dist folder.
 
+## Differences to the upstream version
+
+Our fork of the strichliste-web-frontend can play multiple sounds after a transaction.  
+To add a new sound you need to:
+* Add the new sound file to the `<WEBROOT>/public/sounds/` folder
+* [Add the new sound to the backend settings](https://github.com/Nerdbergev/strichliste-backend/blob/master/README.md#differences-to-the-upstream-version)
+* Reload the frontend in your user agent
+
+To debug if the new sound was properly added you can open the network tab in the dev tools and see if the sound file appears in the request history.
+
 ## Contributing / FAQ
 
 ### Commit Messages
