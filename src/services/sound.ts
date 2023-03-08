@@ -4,6 +4,7 @@ import { CreateTransactionParams } from '../store/reducers';
 const soundsPath = 'sounds/';
 const loadedDispenseSounds: Object = {};
 const loadedDepositSounds: Object = {};
+const playedSounds: Howl[] = [];
 
 export function initializeSounds(depositSounds: string[], dispenseSounds: string[]) {
   loadSounds(depositSounds, loadedDepositSounds);
@@ -28,6 +29,13 @@ function loadSounds(sounds: string[], dst: Object) {
 export function playCashSound(_params?: CreateTransactionParams): void {
   if (!_params) return;
   const sounds: Howl[] = Object.values((_params.amount || 0) >= 0 ? loadedDepositSounds : loadedDispenseSounds);
-  const sound = sounds[Math.floor(Math.random() * sounds.length)];
-  sound.play();
+  if (sounds.length === playedSounds.length) {
+      // clear array
+      playedSounds.splice(0, playedSounds.length);
+  }
+  const sound = sounds.filter(s => !playedSounds.includes(s))[Math.floor(Math.random() * (sounds.length-playedSounds.length))];
+  if (sound) {
+      sound.play();
+      playedSounds.push(sound);
+  }
 }
